@@ -251,7 +251,10 @@ def synthesize_and_upload(paragraphs, voice):
     return result
 
 # === Streamlit UI ===
-tab1, tab2 = st.tabs(["📰 Web Story Prompt Generator", "🔊 TTS + S3 Upload"])
+st.title("🧠 Web Story Content Generator")
+
+tab1, tab2, tab3 = st.tabs(["📝 Slide Prompt Generator", "🔊 TTS Audio Generator", "🎞️ AMP Generator"])
+
 
 with tab1:
     st.title("🧠 Generalized Web Story Prompt Generator")
