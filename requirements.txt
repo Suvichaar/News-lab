@@ -5,4 +5,5 @@ newspaper3k
 textblob
 nltk
 lxml[html_clean]
-boto
+boto3
+
