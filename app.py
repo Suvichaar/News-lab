@@ -20,20 +20,20 @@ except LookupError:
 
 # Azure OpenAI Client
 client = AzureOpenAI(
-    azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
-    api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+    azure_endpoint= st.secrets["azure_api"]["AZURE_OPENAI_ENDPOINT"],
+    api_key= st.secrets["azure_api"]["AZURE_OPENAI_API_KEY"],
     api_version="2024-02-01"
 )
 
-AZURE_TTS_URL = os.getenv("AZURE_TTS_URL")
-AZURE_API_KEY = os.getenv("AZURE_API_KEY")
+AZURE_TTS_URL = st.secrets["azure"]["AZURE_TTS_URL"]
+AZURE_API_KEY = st.secrets["azure"]["AZURE_API_KEY"]
 
-AWS_ACCESS_KEY = os.getenv("AWS_ACCESS_KEY")
-AWS_SECRET_KEY = os.getenv("AWS_SECRET_KEY")
-AWS_REGION = os.getenv("AWS_REGION")
-AWS_BUCKET = os.getenv("AWS_BUCKET")
-S3_PREFIX = os.getenv("S3_PREFIX")
-CDN_BASE = os.getenv("CDN_BASE")
+AWS_ACCESS_KEY = st.secrets["aws"]["AWS_ACCESS_KEY"]
+AWS_SECRET_KEY = st.secrets["aws"]["AWS_SECRET_KEY"]
+AWS_REGION = st.secrets["aws"]["AWS_REGION"]
+AWS_BUCKET = st.secrets["aws"]["AWS_BUCKET"]
+S3_PREFIX = st.secrets["aws"]["S3_PREFIX"]
+CDN_BASE = st.secrets["aws"]["CDN_BASE"]
 
 voice_options = {
     "1": "alloy",
