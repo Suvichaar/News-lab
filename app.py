@@ -333,92 +333,75 @@ with tab2:
                     )
 
 with tab3:
+    #
+    # Streamlit UI
     st.title("🎞️ AMP Web Story Generator with Full Animation and Audio")
-
-    # Fixed path to template
+    
+    # Fixed path to the AMP HTML template file
     TEMPLATE_PATH = Path("test.html")
-
-    # Updated function with full AMP structure
+    
+    # Function to generate an AMP slide using paragraph and audio URL
     def generate_slide(paragraph: str, audio_url: str):
         return f"""
         <amp-story-page id="c29cbf94-847a-4bb7-a4eb-47d17d8c2d5a" auto-advance-after="page-c29cbf94-847a-4bb7-a4eb-47d17d8c2d5a-background-audio" class="i-amphtml-layout-container" i-amphtml-layout="container">
-            <amp-story-animation layout="nodisplay" trigger="visibility" hidden="hidden">
-                <script type="application/json">[{{"selector":"#anim-1a95e072-cada-435a-afea-082ddd65ff10","keyframes":{{"opacity":[0,1]}},"delay":0,"duration":600}}]</script>
+            <amp-story-animation layout="nodisplay" trigger="visibility" class="i-amphtml-layout-nodisplay" hidden="hidden" i-amphtml-layout="nodisplay">
+                <script type="application/json">[{{"selector":"#anim-1a95e072-cada-435a-afea-082ddd65ff10","keyframes":{{"opacity":[0,1]}},"delay":0,"duration":600,"easing":"cubic-bezier(0.2, 0.6, 0.0, 1)","fill":"both"}}]</script>
             </amp-story-animation>
-            <amp-story-animation layout="nodisplay" trigger="visibility" hidden="hidden">
-                <script type="application/json">[{{"selector":"#anim-a938fe3f-03cf-47c5-9a84-da919c4f870b","keyframes":{{"transform":["translate3d(-115.2381%, 0px, 0)","translate3d(0px, 0px, 0)"]}},"delay":0,"duration":600}}]</script>
+            <amp-story-animation layout="nodisplay" trigger="visibility" class="i-amphtml-layout-nodisplay" hidden="hidden" i-amphtml-layout="nodisplay">
+                <script type="application/json">[{{"selector":"#anim-a938fe3f-03cf-47c5-9a84-da919c4f870b","keyframes":{{"transform":["translate3d(-115.2381%, 0px, 0)","translate3d(0px, 0px, 0)"]}},"delay":0,"duration":600,"easing":"cubic-bezier(0.2, 0.6, 0.0, 1)","fill":"both"}}]</script>
             </amp-story-animation>
-            <amp-story-animation layout="nodisplay" trigger="visibility" hidden="hidden">
-                <script type="application/json">[{{"selector":"#anim-f7c5981e-ac77-48d5-9b40-7a987a3e2ab0","keyframes":{{"opacity":[0,1]}},"delay":0,"duration":600}}]</script>
+            <amp-story-animation layout="nodisplay" trigger="visibility" class="i-amphtml-layout-nodisplay" hidden="hidden" i-amphtml-layout="nodisplay">
+                <script type="application/json">[{{"selector":"#anim-f7c5981e-ac77-48d5-9b40-7a987a3e2ab0","keyframes":{{"opacity":[0,1]}},"delay":0,"duration":600,"easing":"cubic-bezier(0.2, 0.6, 0.0, 1)","fill":"both"}}]</script>
             </amp-story-animation>
-            <amp-story-animation layout="nodisplay" trigger="visibility" hidden="hidden">
-                <script type="application/json">[{{"selector":"#anim-0c1e94dd-ab91-415c-9372-0aa2e7e61630","keyframes":{{"transform":["translate3d(-115.55555%, 0px, 0)","translate3d(0px, 0px, 0)"]}},"delay":0,"duration":600}}]</script>
+            <amp-story-animation layout="nodisplay" trigger="visibility" class="i-amphtml-layout-nodisplay" hidden="hidden" i-amphtml-layout="nodisplay">
+                <script type="application/json">[{{"selector":"#anim-0c1e94dd-ab91-415c-9372-0aa2e7e61630","keyframes":{{"transform":["translate3d(-115.55555%, 0px, 0)","translate3d(0px, 0px, 0)"]}},"delay":0,"duration":600,"easing":"cubic-bezier(0.2, 0.6, 0.0, 1)","fill":"both"}}]</script>
             </amp-story-animation>
-            <amp-story-grid-layer template="vertical" aspect-ratio="412:618" class="grid-layer" style="--aspect-ratio:412/618;">
-                <div class="_f09cc7b page-fullbleed-area">
-                    <div class="page-safe-area">
-                        <div class="_6120891">
-                            <div class="_89d52dd mask" id="el-f00095ab-c147-4f19-9857-72ac678f953f">
-                                <div class="_dc67a5c fill"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <amp-story-grid-layer template="vertical" aspect-ratio="412:618" class="grid-layer i-amphtml-layout-container" i-amphtml-layout="container" style="--aspect-ratio:412/618;">
+                <div class="page-fullbleed-area"><div class="page-safe-area">
+                    <div class="_6120891"><div class="_89d52dd mask" id="el-f00095ab-c147-4f19-9857-72ac678f953f">
+                        <div class="_dc67a5c fill"></div></div></div></div></div>
             </amp-story-grid-layer>
-            <amp-story-grid-layer template="fill">
-                <amp-video autoplay layout="fixed" width="1" height="1" poster="" id="page-c29cbf94-847a-4bb7-a4eb-47d17d8c2d5a-background-audio" cache="google" style="width:1px;height:1px">
+            <amp-story-grid-layer template="fill" class="i-amphtml-layout-container" i-amphtml-layout="container">
+                <amp-video autoplay="autoplay" layout="fixed" width="1" height="1" poster="" id="page-c29cbf94-847a-4bb7-a4eb-47d17d8c2d5a-background-audio" cache="google" class="i-amphtml-layout-fixed i-amphtml-layout-size-defined" style="width:1px;height:1px" i-amphtml-layout="fixed">
                     <source type="audio/mpeg" src="{audio_url}">
                 </amp-video>
             </amp-story-grid-layer>
-            <amp-story-grid-layer template="vertical" aspect-ratio="412:618" class="grid-layer" style="--aspect-ratio:412/618;">
-                <div class="page-fullbleed-area">
-                    <div class="page-safe-area">
-                        <div class="_c19e533">
-                            <div class="_89d52dd mask" id="el-344ed989-789b-4a01-a124-9ae1d15d67f4">
-                                <div data-leaf-element="true" class="_8aed44c">
-                                    <amp-img layout="fill" src="https://media.suvichaar.org/upload/polaris/polarisslide.png" alt="polarisslide.png" disable-inline-width="true"></amp-img>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="_3d0c7a9">
-                            <div id="anim-1a95e072-cada-435a-afea-082ddd65ff10" class="_75da10d animation-wrapper">
-                                <div id="anim-a938fe3f-03cf-47c5-9a84-da919c4f870b" class="_e559378 animation-wrapper">
-                                    <div id="el-2f080472-6c81-40a1-ac00-339cc8981388" class="_5342a26">
-                                        <h3 class="_d1a8d0d fill text-wrapper"><span><span class="_14af73e">{paragraph}</span></span></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="_a336742">
-                            <div id="anim-f7c5981e-ac77-48d5-9b40-7a987a3e2ab0" class="_75da10d animation-wrapper">
-                                <div id="anim-0c1e94dd-ab91-415c-9372-0aa2e7e61630" class="_09239f8 animation-wrapper">
-                                    <div id="el-1a0d583c-c99b-4156-825b-3188408c0551" class="_ee8f788">
-                                        <h2 class="_59f9bb8 fill text-wrapper"><span><span class="_14af73e"></span></span></h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <amp-story-grid-layer template="vertical" aspect-ratio="412:618" class="grid-layer i-amphtml-layout-container" i-amphtml-layout="container" style="--aspect-ratio:412/618;">
+                <div class="page-fullbleed-area"><div class="page-safe-area">
+                    <div class="_c19e533"><div class="_89d52dd mask" id="el-344ed989-789b-4a01-a124-9ae1d15d67f4">
+                        <div data-leaf-element="true" class="_8aed44c">
+                            <amp-img layout="fill" src="https://media.suvichaar.org/upload/polaris/polarisslide.png" alt="polarisslide.png" disable-inline-width="true" class="i-amphtml-layout-fill i-amphtml-layout-size-defined" i-amphtml-layout="fill"></amp-img>
+                        </div></div></div>
+                    <div class="_3d0c7a9"><div id="anim-1a95e072-cada-435a-afea-082ddd65ff10" class="_75da10d animation-wrapper">
+                        <div id="anim-a938fe3f-03cf-47c5-9a84-da919c4f870b" class="_e559378 animation-wrapper">
+                            <div id="el-2f080472-6c81-40a1-ac00-339cc8981388" class="_5342a26">
+                                <h3 class="_d1a8d0d fill text-wrapper"><span><span class="_14af73e">{paragraph}</span></span></h3>
+                            </div></div></div></div>
+                    <div class="_a336742"><div id="anim-f7c5981e-ac77-48d5-9b40-7a987a3e2ab0" class="_75da10d animation-wrapper">
+                        <div id="anim-0c1e94dd-ab91-415c-9372-0aa2e7e61630" class="_09239f8 animation-wrapper">
+                            <div id="el-1a0d583c-c99b-4156-825b-3188408c0551" class="_ee8f788">
+                                <h2 class="_59f9bb8 fill text-wrapper"><span><span class="_14af73e"></span></span></h2>
+                            </div></div></div></div></div></div>
             </amp-story-grid-layer>
         </amp-story-page>
         """
-
-    # Upload output.json
+    
+    # Upload output.json file
     output_json_file = st.file_uploader("📦 Upload Output JSON", type=["json"], key="amp_json_upload")
-
+    
+    # Check if template file exists
     if not TEMPLATE_PATH.exists():
         st.error("❌ 'test.html' not found in the repo directory.")
     else:
         with open(TEMPLATE_PATH, "r", encoding="utf-8") as f:
             template_html = f.read()
-
+    
         if output_json_file:
             try:
                 output_data = json.load(output_json_file)
-
+    
                 if "<!--INSERT_SLIDES_HERE-->" not in template_html:
-                    st.error("❌ Placeholder <!--INSERT_SLIDES_HERE--> not found in test.html.")
+                    st.error("❌ Placeholder <!--INSERT_SLIDES_HERE--> not found in template.html.")
                 else:
                     all_slides = ""
                     for key in sorted(output_data.keys(), key=lambda x: int(x.replace("slide", ""))):
@@ -426,17 +409,17 @@ with tab3:
                         data = output_data[key]
                         para_key = f"s{slide_num}paragraph1"
                         audio_key = f"audio_url{slide_num}"
-
+    
                         if para_key in data and audio_key in data:
                             paragraph = data[para_key].replace("’", "'").replace('"', '&quot;')
                             audio_url = data[audio_key]
                             all_slides += generate_slide(paragraph, audio_url)
-
+    
                     final_html = template_html.replace("<!--INSERT_SLIDES_HERE-->", all_slides)
-
+    
                     timestamp = int(time.time())
                     filename = f"final_output_modified_{timestamp}.html"
-
+    
                     st.success("✅ AMP HTML generated!")
                     st.download_button(
                         label="📥 Download Final AMP HTML",
@@ -444,6 +427,6 @@ with tab3:
                         file_name=filename,
                         mime="text/html"
                     )
-
+    
             except Exception as e:
                 st.error(f"⚠️ Error: {str(e)}")
