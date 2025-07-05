@@ -105,7 +105,7 @@ Return as JSON:
 
 def title_script_generator(category, subcategory, emotion, article_text, character_sketch=None):
     if not character_sketch:
-        character_sketch = "Rohan Sharma is a sincere and articulate Hindi-English news anchor..."
+        character_sketch = "Polaris is a sincere and articulate Hindi-English news anchor..."
 
     system_prompt = """
 You are a digital content editor.
@@ -147,18 +147,18 @@ Article:
         return {"category": category, "subcategory": subcategory, "emotion": emotion, "slides": []}
 
     headline = article_text.split("\n")[0].strip().replace('"', '')
-    slide1_script = f"Namaskar doston, main hoon Rohan Sharma. Aaj ki badi khabar: {headline}"
+    slide1_script = f"Namaskar doston, main hoon Polaris. Aaj ki badi khabar: {headline}"
 
     slides = [{
         "title": headline[:80],
         "prompt": "Intro slide with greeting and headline.",
-        "image_prompt": f"Vector-style illustration of Rohan Sharma presenting news: {headline}",
+        "image_prompt": f"Vector-style illustration of Polaris presenting news: {headline}",
         "script": slide1_script
     }]
 
     for slide in slides_raw:
         narration_prompt = f"""
-Write a 3–4 line Hindi-English narration in the voice of Rohan Sharma.
+Write a 3–4 line Hindi-English narration in the voice of Polaris.
 
 Instruction: {slide['prompt']}
 Tone: Warm, simple, and clear. Avoid self-introduction.
