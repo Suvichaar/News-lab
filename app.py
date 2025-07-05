@@ -303,7 +303,7 @@ with tab1:
                         json.dump(structured_output, f, indent=2, ensure_ascii=False)
 
                     with open(filename, "r", encoding="utf-8") as f:
-                        st.success("✅ Prompt generation complete! Click below to download:")
+                        st.success("✅ Prompt generation complete!! Click below to download:")
                         st.download_button(
                             label=f"⬇️ Download JSON ({timestamp})",
                             data=f.read(),
