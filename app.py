@@ -288,7 +288,7 @@ with tab1:
                     sentiment = get_sentiment(summary or full_text)
                     result = detect_category_and_subcategory(full_text)
                     category, subcategory, emotion = result["category"], result["subcategory"], result["emotion"]
-
+    
                     output = title_script_generator(category, subcategory, emotion, full_text)
                     final_output = {
                         "title": title,
@@ -298,16 +298,19 @@ with tab1:
                         "category": category,
                         "subcategory": subcategory,
                         "persona": persona,
-                        "slides": output.get("slides", [])
+                        "slides": output.get("slides", []),
+                        "storytitle": title.strip()  # <-- added here
                     }
-
+    
                     structured_output = restructure_slide_output(final_output)
+                    structured_output["storytitle"] = title.strip()  # <-- also add it to downloadable JSON
+    
                     timestamp = int(time.time())
                     filename = f"structured_slides_{timestamp}.json"
-
+    
                     with open(filename, "w", encoding="utf-8") as f:
                         json.dump(structured_output, f, indent=2, ensure_ascii=False)
-
+    
                     with open(filename, "r", encoding="utf-8") as f:
                         st.success("✅ Prompt generation complete!! Click below to download:")
                         st.download_button(
@@ -320,6 +323,7 @@ with tab1:
                     st.error(f"❌ Error: {str(e)}")
         else:
             st.warning("Please enter a valid URL and choose a persona.")
+
 
 with tab2:
     st.title("🎙️ GPT-4o Text-to-Speech to S3")
