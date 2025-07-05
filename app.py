@@ -264,47 +264,46 @@ with tab1:
         ["genz", "millenial", "working professionals", "creative thinkers", "spiritual explorers"]
     )
 
-    if url and persona:
-        with st.spinner("Analyzing the article and generating prompts..."):
-            try:
-                title, summary, full_text = extract_article(url)
-                sentiment = get_sentiment(summary)
-                result = detect_category_and_subcategory(full_text)
-                category, subcategory, emotion = result["category"], result["subcategory"], result["emotion"]
+    if st.button("🚀 Submit and Generate JSON"):
+        if url and persona:
+            with st.spinner("Analyzing the article and generating prompts..."):
+                try:
+                    title, summary, full_text = extract_article(url)
+                    sentiment = get_sentiment(summary)
+                    result = detect_category_and_subcategory(full_text)
+                    category, subcategory, emotion = result["category"], result["subcategory"], result["emotion"]
 
-                output = title_script_generator(category, subcategory, emotion, full_text)
-                final_output = {
-                    "title": title,
-                    "summary": summary,
-                    "sentiment": sentiment,
-                    "emotion": emotion,
-                    "category": category,
-                    "subcategory": subcategory,
-                    "persona": persona,
-                    "slides": output.get("slides", [])
-                }
+                    output = title_script_generator(category, subcategory, emotion, full_text)
+                    final_output = {
+                        "title": title,
+                        "summary": summary,
+                        "sentiment": sentiment,
+                        "emotion": emotion,
+                        "category": category,
+                        "subcategory": subcategory,
+                        "persona": persona,
+                        "slides": output.get("slides", [])
+                    }
 
-                st.success("✅ Prompt generation complete!")
-                st.json(final_output)
+                    structured_output = restructure_slide_output(final_output)
+                    timestamp = int(time.time())
+                    filename = f"structured_slides_{timestamp}.json"
 
-                structured_output = restructure_slide_output(final_output)
-                st.subheader("📄 Structured Slide Narration Format")
-                st.json(structured_output)
+                    with open(filename, "w", encoding="utf-8") as f:
+                        json.dump(structured_output, f, indent=2, ensure_ascii=False)
 
-                timestamp = int(time.time())
-                filename = f"structured_slides_{timestamp}.json"
-                with open(filename, "w", encoding="utf-8") as f:
-                    json.dump(structured_output, f, indent=2, ensure_ascii=False)
-
-                with open(filename, "r", encoding="utf-8") as f:
-                    st.download_button(
-                        label=f"⬇️ Download JSON ({timestamp})",
-                        data=f.read(),
-                        file_name=filename,
-                        mime="application/json"
-                    )
-            except Exception as e:
-                st.error(f"❌ Error: {str(e)}")
+                    with open(filename, "r", encoding="utf-8") as f:
+                        st.success("✅ Prompt generation complete! Click below to download:")
+                        st.download_button(
+                            label=f"⬇️ Download JSON ({timestamp})",
+                            data=f.read(),
+                            file_name=filename,
+                            mime="application/json"
+                        )
+                except Exception as e:
+                    st.error(f"❌ Error: {str(e)}")
+        else:
+            st.warning("Please enter a valid URL and choose a persona.")
 
 with tab2:
     st.title("🎙️ GPT-4o Text-to-Speech to S3")
