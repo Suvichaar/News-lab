@@ -282,7 +282,7 @@ with tab1:
 
     if st.button("🚀 Submit and Generate JSON"):
         if url and persona:
-            with st.spinner("Analyzing the article and generating prompts..."):
+            with st.spinner("Analyzing the article and generating news for you..."):
                 try:
                     title, summary, full_text = extract_article(url)
                     sentiment = get_sentiment(summary or full_text)
@@ -299,11 +299,21 @@ with tab1:
                         "subcategory": subcategory,
                         "persona": persona,
                         "slides": output.get("slides", []),
-                        "storytitle": title.strip()  # <-- added here
+                        "storytitle": title.strip()  # ✅ storytitle added here
                     }
     
-                    structured_output = restructure_slide_output(final_output)
-                    structured_output["storytitle"] = title.strip()  # <-- also add it to downloadable JSON
+                    # ✅ Include all metadata and storytitle in the final output JSON
+                    structured_output = {
+                        **restructure_slide_output(final_output),
+                        "storytitle": title.strip(),
+                        "title": title.strip(),
+                        "summary": summary,
+                        "sentiment": sentiment,
+                        "emotion": emotion,
+                        "category": category,
+                        "subcategory": subcategory,
+                        "persona": persona
+                    }
     
                     timestamp = int(time.time())
                     filename = f"structured_slides_{timestamp}.json"
@@ -323,6 +333,7 @@ with tab1:
                     st.error(f"❌ Error: {str(e)}")
         else:
             st.warning("Please enter a valid URL and choose a persona.")
+
 
 
 with tab2:
