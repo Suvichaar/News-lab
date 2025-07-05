@@ -53,15 +53,18 @@ def extract_article(url):
     article.parse()
 
     try:
-        article.nlp()  # Generate summary
+        article.nlp()
     except:
         pass
 
-    title = article.title or "Untitled Article"
-    summary = article.summary or article.text[:300] or "No summary available."
-    full_text = article.text or "No article text available."
+    # Fallbacks for missing fields
+    title = article.title if article.title else "Untitled Article"
+    text = article.text if article.text else "No article content available."
+    summary = article.summary if article.summary else text[:300]
 
-    return title, summary, full_text
+    # Final strip to ensure clean outputs
+    return title.strip(), summary.strip(), text.strip()
+
 
 def get_sentiment(text):
     from textblob import TextBlob
@@ -156,6 +159,9 @@ Article:
     except:
         return {"category": category, "subcategory": subcategory, "emotion": emotion, "slides": []}
 
+    if not article_text:
+        article_text = "This article content could not be extracted properly."
+    
     headline = article_text.split("\n")[0].strip().replace('"', '')
     slide1_script = f"Namaskar doston, main hoon Polaris. Aaj ki badi khabar: {headline}"
 
