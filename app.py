@@ -51,7 +51,17 @@ def extract_article(url):
     article = newspaper.Article(url)
     article.download()
     article.parse()
-    return article.title, article.summary, article.text
+
+    try:
+        article.nlp()  # Generate summary
+    except:
+        pass
+
+    title = article.title or "Untitled Article"
+    summary = article.summary or article.text[:300] or "No summary available."
+    full_text = article.text or "No article text available."
+
+    return title, summary, full_text
 
 def get_sentiment(text):
     from textblob import TextBlob
@@ -269,7 +279,7 @@ with tab1:
             with st.spinner("Analyzing the article and generating prompts..."):
                 try:
                     title, summary, full_text = extract_article(url)
-                    sentiment = get_sentiment(summary)
+                    sentiment = get_sentiment(summary or full_text)
                     result = detect_category_and_subcategory(full_text)
                     category, subcategory, emotion = result["category"], result["subcategory"], result["emotion"]
 
